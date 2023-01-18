@@ -20,7 +20,7 @@ import useColorScheme from "../hooks/useColorScheme";
 import Auth from "../screens/Auth/Auth";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../screens/TabOneScreen";
+import TabOneScreen from "../screens/TabOneScreen/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import {
   RootStackParamList,

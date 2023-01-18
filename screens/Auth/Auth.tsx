@@ -12,12 +12,10 @@ import Svg, { Image, Ellipse, ClipPath } from "react-native-svg";
 import { supabase } from "../../lib/supabase";
 import { RootStackScreenProps } from "../../types";
 import styles from "./styles";
-import Layout from "../../constants/Layout";
+import { width, height } from "../../constants/Layout";
 import Animated, { withSequence, withSpring } from "react-native-reanimated";
 import { AntDesign } from "@expo/vector-icons";
 import useAuthAnimations from "./useAuthAnimations";
-
-const { width, height } = Layout.window;
 
 export default function Auth({ navigation }: RootStackScreenProps<"Auth">) {
   const [email, setEmail] = useState("");

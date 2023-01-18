@@ -5,9 +5,7 @@ import {
   withDelay,
   withTiming,
 } from "react-native-reanimated";
-import Layout from "../../constants/Layout";
-
-const { height } = Layout.window;
+import { height } from "../../constants/Layout";
 
 export default function useAuthAnimations() {
   const imagePosition = useSharedValue(1);

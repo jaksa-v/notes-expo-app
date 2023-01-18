@@ -1,7 +1,5 @@
 import { StyleSheet } from "react-native";
-import Layout from "../../constants/Layout";
-
-const { width, height } = Layout.window;
+import { height } from "../../constants/Layout";
 
 const styles = StyleSheet.create({
   container: {
