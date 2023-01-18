@@ -13,16 +13,9 @@ import { supabase } from "../../lib/supabase";
 import { RootStackScreenProps } from "../../types";
 import styles from "./styles";
 import Layout from "../../constants/Layout";
-import Animated, {
-  interpolate,
-  useAnimatedStyle,
-  useSharedValue,
-  withDelay,
-  withSequence,
-  withSpring,
-  withTiming,
-} from "react-native-reanimated";
+import Animated, { withSequence, withSpring } from "react-native-reanimated";
 import { AntDesign } from "@expo/vector-icons";
+import useAuthAnimations from "./useAuthAnimations";
 
 const { width, height } = Layout.window;
 
@@ -32,6 +25,16 @@ export default function Auth({ navigation }: RootStackScreenProps<"Auth">) {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [register, setRegister] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const {
+    imageAnimatedStyle,
+    buttonsAnimatedStyle,
+    closeButtonContainerStyle,
+    formAnimatedStyle,
+    formButtonAnimatedStyle,
+    imagePosition,
+    formButtonScale,
+  } = useAuthAnimations();
 
   async function signInWithEmail() {
     setLoading(true);
@@ -65,63 +68,10 @@ export default function Auth({ navigation }: RootStackScreenProps<"Auth">) {
     } else {
       setEmail("");
       setPassword("");
+      setPasswordConfirm("");
       navigation.navigate("Root");
     }
   }
-
-  const imagePosition = useSharedValue(1);
-  const formButtonScale = useSharedValue(1);
-
-  const imageAnimatedStyle = useAnimatedStyle(() => {
-    const interpolation = interpolate(
-      imagePosition.value,
-      [-1, 0, 1],
-      [(-height * 3) / 4, -height / 2, 0]
-    );
-
-    return {
-      transform: [
-        { translateY: withTiming(interpolation, { duration: 1000 }) },
-      ],
-    };
-  });
-
-  const buttonsAnimatedStyle = useAnimatedStyle(() => {
-    const interpolation = interpolate(imagePosition.value, [0, 1], [250, 0]);
-    return {
-      opacity: withTiming(imagePosition.value, { duration: 500 }),
-      transform: [
-        {
-          translateY: withTiming(interpolation, { duration: 1000 }),
-        },
-      ],
-    };
-  });
-
-  const closeButtonContainerStyle = useAnimatedStyle(() => {
-    const interpolation = interpolate(imagePosition.value, [0, 1], [180, 360]);
-    return {
-      opacity: withTiming(imagePosition.value === 1 ? 0 : 1, { duration: 800 }),
-      transform: [
-        { rotate: withTiming(`${interpolation}deg`, { duration: 1000 }) },
-      ],
-    };
-  });
-
-  const formAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      opacity:
-        imagePosition.value < 1
-          ? withDelay(400, withTiming(1, { duration: 800 }))
-          : withTiming(0, { duration: 300 }),
-    };
-  });
-
-  const formButtonAnimatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ scale: formButtonScale.value }],
-    };
-  });
 
   const loginHandler = () => {
     imagePosition.value = 0;
