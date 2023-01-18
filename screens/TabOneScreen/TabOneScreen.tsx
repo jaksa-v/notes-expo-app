@@ -3,6 +3,7 @@ import { Alert, Pressable } from "react-native";
 import NoteCard from "../../components/NoteCard/NoteCard";
 
 import { Text, View } from "../../components/Themed";
+import shadows from "../../constants/shadows";
 import { Database } from "../../lib/database.types";
 import { supabase } from "../../lib/supabase";
 import { RootTabScreenProps } from "../../types";
@@ -41,7 +42,10 @@ export default function TabOneScreen({
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={signOut} style={styles.signOutButton}>
+      <Pressable
+        onPress={signOut}
+        style={[styles.signOutButton, shadows.shadowSm]}
+      >
         <Text style={styles.buttonText}>Sign Out</Text>
       </Pressable>
       <View style={styles.notesContainer}>

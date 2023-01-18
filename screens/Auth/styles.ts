@@ -39,16 +39,6 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     fontFamily: "Montserrat_400Regular",
   },
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
   formInputContainer: {
     marginBottom: 72,
     zIndex: -1,
@@ -60,14 +50,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 6.27,
-    elevation: 10,
     backgroundColor: "white",
     borderRadius: 20,
     top: -20,

@@ -16,6 +16,7 @@ import { width, height } from "../../constants/Layout";
 import Animated, { withSequence, withSpring } from "react-native-reanimated";
 import { AntDesign } from "@expo/vector-icons";
 import useAuthAnimations from "./useAuthAnimations";
+import shadows from "../../constants/shadows";
 
 export default function Auth({ navigation }: RootStackScreenProps<"Auth">) {
   const [email, setEmail] = useState("");
@@ -126,7 +127,11 @@ export default function Auth({ navigation }: RootStackScreenProps<"Auth">) {
           />
         </Svg>
         <Animated.View
-          style={[styles.closeButtonContainer, closeButtonContainerStyle]}
+          style={[
+            styles.closeButtonContainer,
+            closeButtonContainerStyle,
+            shadows.shadowMd,
+          ]}
         >
           <Text onPress={closeButtonHandler}>
             <AntDesign
@@ -157,29 +162,31 @@ export default function Auth({ navigation }: RootStackScreenProps<"Auth">) {
         >
           <TextInput
             placeholder="Email"
-            placeholderTextColor="black"
+            placeholderTextColor="rgba(0, 0, 0, 0.4)"
             value={email}
             onChangeText={(text) => setEmail(text)}
             style={styles.textInput}
           />
           <TextInput
             placeholder="Password"
-            placeholderTextColor="black"
+            placeholderTextColor="rgba(0, 0, 0, 0.4)"
             value={password}
             onChangeText={(text) => setPassword(text)}
             style={styles.textInput}
+            secureTextEntry={true}
           />
           {register && (
             <TextInput
               placeholder="Confirm Password"
-              placeholderTextColor="black"
+              placeholderTextColor="rgba(0, 0, 0, 0.4)"
               value={passwordConfirm}
               onChangeText={(text) => setPasswordConfirm(text)}
               style={styles.textInput}
+              secureTextEntry={true}
             />
           )}
           <Animated.View
-            style={[styles.button, styles.shadow, formButtonAnimatedStyle]}
+            style={[styles.button, shadows.shadowSm, formButtonAnimatedStyle]}
           >
             <Pressable onPress={formSubmitHandler} disabled={loading}>
               <Text style={styles.buttonText}>

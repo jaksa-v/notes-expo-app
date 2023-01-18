@@ -19,13 +19,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#f194ff",
     borderRadius: 20,
     padding: 12,
-    elevation: 2,
     marginTop: statusBarHeight + 4,
     marginRight: 16,
     alignSelf: "flex-end",
   },
   notesContainer: {
-    backgroundColor: "yellow",
     flexDirection: "row",
     justifyContent: "space-between",
     flexWrap: "wrap",
