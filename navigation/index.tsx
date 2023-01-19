@@ -28,6 +28,7 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import TabOneStackNavigator from "./TabOneStack";
 
 export default function Navigation({
   colorScheme,
@@ -99,7 +100,7 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="TabOne"
-        component={TabOneScreen}
+        component={TabOneStackNavigator}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
           title: "Notes",
           tabBarIcon: ({ color }) => (

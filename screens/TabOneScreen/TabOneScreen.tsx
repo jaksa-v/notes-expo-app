@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import { Alert, Pressable } from "react-native";
+import { Alert } from "react-native";
+import CreateNoteButton from "../../components/CreateNoteButton/CreateNoteButton";
 import NoteCard from "../../components/NoteCard/NoteCard";
 
 import { Text, View } from "../../components/Themed";
-import Colors from "../../constants/Colors";
-import shadows from "../../constants/shadows";
 import { Database } from "../../lib/database.types";
 import { supabase } from "../../lib/supabase";
-import { RootTabScreenProps } from "../../types";
+import { TabOneStackScreenProps } from "../../types";
 import styles from "./styles";
 
 export default function TabOneScreen({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
+  route,
+}: TabOneStackScreenProps<"Root">) {
   const [notes, setNotes] =
     useState<Database["public"]["Tables"]["notes"]["Row"][]>();
 
@@ -26,6 +26,12 @@ export default function TabOneScreen({
     }
   }
 
+  function handleNotePress(note: Database["public"]["Tables"]["notes"]["Row"]) {
+    navigation.navigate("Note", {
+      note,
+    });
+  }
+
   useEffect(() => {
     getNotes();
   }, []);
@@ -34,8 +40,13 @@ export default function TabOneScreen({
     <View style={styles.container}>
       <View style={styles.notesContainer}>
         {notes?.map((note) => (
-          <NoteCard key={note.id} note={note} />
+          <NoteCard
+            key={note.id}
+            note={note}
+            handleNotePress={() => handleNotePress(note)}
+          />
         ))}
+        <CreateNoteButton navigation={navigation} route={route} />
       </View>
     </View>
   );

@@ -9,6 +9,7 @@ import {
   NavigatorScreenParams,
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Database } from "./lib/database.types";
 
 declare global {
   namespace ReactNavigation {
@@ -16,6 +17,7 @@ declare global {
   }
 }
 
+// ROOT STACK NAVIGATOR
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   Auth: undefined;
@@ -26,6 +28,17 @@ export type RootStackParamList = {
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
 
+// TAB ONE STACK NAVIGATOR
+export type TabOneStackParamList = {
+  Root: undefined;
+  Note: { note: Database["public"]["Tables"]["notes"]["Row"] };
+  CreateNote: undefined;
+};
+
+export type TabOneStackScreenProps<Screen extends keyof TabOneStackParamList> =
+  NativeStackScreenProps<TabOneStackParamList, Screen>;
+
+// BOTTOM TAB NAVIGATOR
 export type RootTabParamList = {
   TabOne: undefined;
   TabTwo: undefined;
