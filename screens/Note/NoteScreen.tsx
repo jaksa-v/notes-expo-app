@@ -7,8 +7,8 @@ export default function NoteScreen({ route }: TabOneStackScreenProps<"Note">) {
   const { note } = route.params;
   return (
     <View style={styles.container}>
-      <Text>{note.title}</Text>
-      <Text>{note.content}</Text>
+      <Text style={styles.title}>{note.title}</Text>
+      <Text style={styles.content}>{note.content}</Text>
     </View>
   );
 }

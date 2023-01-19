@@ -5,7 +5,7 @@ import styles from "./styles";
 export default function CreateNoteScreen() {
   return (
     <View style={styles.container}>
-      <Text>Create Note</Text>
+      <Text style={styles.title}>Create Note</Text>
     </View>
   );
 }

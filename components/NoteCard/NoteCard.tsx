@@ -16,8 +16,10 @@ export default function NoteCard({
   return (
     <View key={note.id} style={[styles.container, shadows.shadowMd]}>
       <Pressable onPress={handleNotePress}>
-        <Text style={styles.titleText}>{note.title}</Text>
-        <Text style={styles.contentText}>{note.content}</Text>
+        <View style={styles.content}>
+          <Text style={styles.titleText}>{note.title}</Text>
+          <Text style={styles.contentText}>{note.content}</Text>
+        </View>
       </Pressable>
     </View>
   );

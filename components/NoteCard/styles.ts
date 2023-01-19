@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     marginVertical: "2%",
     height: height / 4,
   },
+  content: {
+    height: "100%",
+  },
   titleText: {
     fontSize: 18,
     fontFamily: "Montserrat_700Bold",
