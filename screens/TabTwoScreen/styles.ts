@@ -22,15 +22,6 @@ const styles = StyleSheet.create({
     marginRight: 16,
     alignSelf: "flex-end",
   },
-  notesContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    width: "100%",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginTop: statusBarHeight,
-  },
 });
 
 export default styles;

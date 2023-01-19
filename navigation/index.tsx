@@ -3,7 +3,7 @@
  * https://reactnavigation.org/docs/getting-started
  *
  */
-import { FontAwesome } from "@expo/vector-icons";
+import { Feather, FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   NavigationContainer,
@@ -21,7 +21,7 @@ import Auth from "../screens/Auth/Auth";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import TabOneScreen from "../screens/TabOneScreen/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import TabTwoScreen from "../screens/TabTwoScreen/TabTwoScreen";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -92,16 +92,19 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="TabOne"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: Colors[colorScheme].text,
         headerShown: false,
+        tabBarItemStyle: { marginVertical: 4 },
       }}
     >
       <BottomTab.Screen
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Notes",
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="sticky-note-o" size={24} color={color} />
+          ),
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate("Modal")}
@@ -123,8 +126,10 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={TabTwoScreen}
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Settings",
+          tabBarIcon: ({ color }) => (
+            <Feather name="settings" size={24} color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>

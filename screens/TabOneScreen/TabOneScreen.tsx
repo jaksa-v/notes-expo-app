@@ -3,6 +3,7 @@ import { Alert, Pressable } from "react-native";
 import NoteCard from "../../components/NoteCard/NoteCard";
 
 import { Text, View } from "../../components/Themed";
+import Colors from "../../constants/Colors";
 import shadows from "../../constants/shadows";
 import { Database } from "../../lib/database.types";
 import { supabase } from "../../lib/supabase";
@@ -15,23 +16,12 @@ export default function TabOneScreen({
   const [notes, setNotes] =
     useState<Database["public"]["Tables"]["notes"]["Row"][]>();
 
-  async function signOut() {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      Alert.alert(error.message);
-    } else {
-      navigation.navigate("Auth");
-    }
-  }
-
   async function getNotes() {
     const { data, error } = await supabase.from("notes").select("*").limit(10);
 
     if (error) {
       Alert.alert(error.message);
     } else {
-      console.log("Data: ", data);
       setNotes(data);
     }
   }
@@ -42,12 +32,6 @@ export default function TabOneScreen({
 
   return (
     <View style={styles.container}>
-      <Pressable
-        onPress={signOut}
-        style={[styles.signOutButton, shadows.shadowSm]}
-      >
-        <Text style={styles.buttonText}>Sign Out</Text>
-      </Pressable>
       <View style={styles.notesContainer}>
         {notes?.map((note) => (
           <NoteCard key={note.id} note={note} />

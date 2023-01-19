@@ -4,7 +4,7 @@ import { height } from "../../constants/Layout";
 const styles = StyleSheet.create({
   container: {
     width: "48%",
-    backgroundColor: "lightblue",
+    // backgroundColor: "lightblue",
     borderRadius: 12,
     padding: 8,
     marginVertical: "2%",
