@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
-import { Alert } from "react-native";
+import { useQuery } from "@tanstack/react-query";
 import CreateNoteButton from "../../components/CreateNoteButton/CreateNoteButton";
 import NoteCard from "../../components/NoteCard/NoteCard";
 
-import { Text, View } from "../../components/Themed";
+import { View } from "../../components/Themed";
 import { Database } from "../../lib/database.types";
-import { supabase } from "../../lib/supabase";
+import { getNotes } from "../../lib/notesFunctions";
 import { TabOneStackScreenProps } from "../../types";
 import styles from "./styles";
 
@@ -13,28 +12,16 @@ export default function TabOneScreen({
   navigation,
   route,
 }: TabOneStackScreenProps<"Root">) {
-  const [notes, setNotes] =
-    useState<Database["public"]["Tables"]["notes"]["Row"][]>();
-
-  async function getNotes() {
-    const { data, error } = await supabase.from("notes").select("*").limit(10);
-
-    if (error) {
-      Alert.alert(error.message);
-    } else {
-      setNotes(data);
-    }
-  }
+  const { data: notes } = useQuery({
+    queryKey: ["notes"],
+    queryFn: () => getNotes(),
+  });
 
   function handleNotePress(note: Database["public"]["Tables"]["notes"]["Row"]) {
     navigation.navigate("Note", {
       note,
     });
   }
-
-  useEffect(() => {
-    getNotes();
-  }, []);
 
   return (
     <View style={styles.container}>

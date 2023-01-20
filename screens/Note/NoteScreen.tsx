@@ -5,6 +5,8 @@ import { useState } from "react";
 
 import styles from "./styles";
 import { supabase } from "../../lib/supabase";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createNote, updateNote } from "../../lib/notesFunctions";
 
 export default function NoteScreen({ route }: TabOneStackScreenProps<"Note">) {
   const noteExists = route.params?.note ? true : false;
@@ -12,35 +14,22 @@ export default function NoteScreen({ route }: TabOneStackScreenProps<"Note">) {
   const [content, onChangeContent] = useState(note?.content ?? "");
   const [title, onChangeTitle] = useState(note?.title ?? "New Note");
 
-  async function handlePress() {
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+  const queryClient = useQueryClient();
 
-    if (user) {
-      if (noteExists) {
-        try {
-          const { data, error } = await supabase
-            .from("notes")
-            .update({ title, content })
-            .eq("id", note?.id)
-            .select();
-          console.log(data, error);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        try {
-          const { data, error } = await supabase
-            .from("notes")
-            .insert({ author_id: user?.id, title, content });
-          console.log(data, error);
-        } catch (error) {
-          console.log(error);
-        }
-      }
+  const updateMutation = useMutation({
+    mutationFn: () => updateNote(title, content, note!.id),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["notes"] }),
+  });
+  const createMutation = useMutation({
+    mutationFn: () => createNote(title, content),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["notes"] }),
+  });
+
+  async function handlePress() {
+    if (noteExists) {
+      updateMutation.mutate();
     } else {
-      console.log("User not logged in");
+      createMutation.mutate();
     }
   }
 

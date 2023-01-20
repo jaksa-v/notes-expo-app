@@ -10,6 +10,9 @@ import { Session } from "@supabase/supabase-js";
 import { supabase } from "./lib/supabase";
 
 import { useState, useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 export default function App() {
   const { isLoadingComplete, fontsLoaded } = useCachedResources();
@@ -31,10 +34,12 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} session={session} />
-        <StatusBar translucent={true} backgroundColor="transparent" />
-      </SafeAreaProvider>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaProvider>
+          <Navigation colorScheme={colorScheme} session={session} />
+          <StatusBar translucent={true} backgroundColor="transparent" />
+        </SafeAreaProvider>
+      </QueryClientProvider>
     );
   }
 }
