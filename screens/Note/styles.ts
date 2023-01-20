@@ -6,7 +6,13 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
   },
+  titleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
   title: {
+    flexGrow: 1,
     fontSize: 24,
     fontFamily: "Montserrat_700Bold",
   },

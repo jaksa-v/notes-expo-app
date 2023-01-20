@@ -43,3 +43,12 @@ export async function createNote(title: string, content: string) {
     throw new Error("Error creating note");
   }
 }
+
+export async function deleteNote(id: number) {
+  try {
+    const response = await supabase.from("notes").delete().eq("id", id);
+    return response.data;
+  } catch (error) {
+    throw new Error("Error deleting note");
+  }
+}
