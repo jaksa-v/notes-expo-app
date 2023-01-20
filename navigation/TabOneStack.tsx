@@ -1,5 +1,4 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import CreateNoteScreen from "../screens/CreateNoteScreen/CreateNoteScreen";
 import NoteScreen from "../screens/Note/NoteScreen";
 import TabOneScreen from "../screens/TabOneScreen/TabOneScreen";
 import { TabOneStackParamList } from "../types";
@@ -8,7 +7,12 @@ const Stack = createNativeStackNavigator<TabOneStackParamList>();
 
 export default function TabOneStackNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShadowVisible: false,
+        headerTitle: "",
+      }}
+    >
       <Stack.Screen
         name="Root"
         component={TabOneScreen}
@@ -17,12 +21,7 @@ export default function TabOneStackNavigator() {
       <Stack.Screen
         name="Note"
         component={NoteScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CreateNote"
-        component={CreateNoteScreen}
-        options={{ headerShown: false }}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );

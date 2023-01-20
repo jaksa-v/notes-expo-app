@@ -11,7 +11,7 @@ export default function CreateNoteButton({
 }: TabOneStackScreenProps<"Root">) {
   return (
     <View style={[styles.container, shadows.shadowSm]}>
-      <Pressable onPress={() => navigation.navigate("CreateNote")}>
+      <Pressable onPress={() => navigation.navigate("Note")}>
         <AntDesign name="plus" size={24} color="black" />
       </Pressable>
     </View>

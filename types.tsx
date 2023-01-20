@@ -31,8 +31,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 // TAB ONE STACK NAVIGATOR
 export type TabOneStackParamList = {
   Root: undefined;
-  Note: { note: Database["public"]["Tables"]["notes"]["Row"] };
-  CreateNote: undefined;
+  Note: { note: Database["public"]["Tables"]["notes"]["Row"] } | undefined;
 };
 
 export type TabOneStackScreenProps<Screen extends keyof TabOneStackParamList> =

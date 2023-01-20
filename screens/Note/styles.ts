@@ -9,12 +9,29 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontFamily: "Montserrat_700Bold",
-    marginTop: statusBarHeight + 16,
   },
   content: {
-    marginTop: 16,
+    marginVertical: 16,
     fontSize: 16,
     fontFamily: "Montserrat_400Regular",
+    flex: 1,
+    textAlignVertical: "top",
+  },
+  saveButton: {
+    position: "absolute",
+    bottom: 16,
+    right: 16,
+    borderRadius: 28,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    justifyContent: "center",
+    borderColor: "#000",
+    borderWidth: 3,
+  },
+  saveButtonText: {
+    fontSize: 20,
+    fontFamily: "Montserrat_400Regular",
+    textAlign: "center",
   },
 });
 
