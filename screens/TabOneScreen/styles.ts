@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
   },
   notesContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
+    // flexDirection: "row",
+    // justifyContent: "space-between",
+    // flexWrap: "wrap",
     width: "100%",
     paddingVertical: 8,
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
     marginTop: statusBarHeight,
   },
 });

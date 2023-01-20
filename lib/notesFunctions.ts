@@ -2,7 +2,11 @@ import { supabase } from "./supabase";
 
 export async function getNotes() {
   try {
-    const response = await supabase.from("notes").select("*").limit(10);
+    const response = await supabase
+      .from("notes")
+      .select("*")
+      .limit(10)
+      .order("updated_at", { ascending: false });
     return response.data;
   } catch {
     throw new Error("Error getting notes");

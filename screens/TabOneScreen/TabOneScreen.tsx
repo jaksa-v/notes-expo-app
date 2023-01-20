@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import CreateNoteButton from "../../components/CreateNoteButton/CreateNoteButton";
 import NoteCard from "../../components/NoteCard/NoteCard";
-
+import { FlatList } from "react-native";
 import { View } from "../../components/Themed";
 import { Database } from "../../lib/database.types";
 import { getNotes } from "../../lib/notesFunctions";
@@ -23,16 +23,28 @@ export default function TabOneScreen({
     });
   }
 
+  function separator() {
+    return <View style={{ padding: 8, backgroundColor: "transparent" }} />;
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.notesContainer}>
-        {notes?.map((note) => (
-          <NoteCard
-            key={note.id}
-            note={note}
-            handleNotePress={() => handleNotePress(note)}
-          />
-        ))}
+        <FlatList
+          data={notes}
+          keyExtractor={(note) => note.id.toString()}
+          renderItem={({ item: note }) => (
+            <NoteCard
+              note={note}
+              handleNotePress={() => handleNotePress(note)}
+            />
+          )}
+          numColumns={2}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={separator}
+          contentContainerStyle={{ padding: 16 }}
+        />
         <CreateNoteButton navigation={navigation} route={route} />
       </View>
     </View>
